@@ -1,0 +1,28 @@
+body { padding: 20px 0; }
+h2 { margin-bottom: 10px; font: normal normal 20px/26px "Helvetica Neue", Helvetica, Arial, sans-serif; }
+h3 { margin-bottom: 10px; }
+#wrapper { margin: 0 auto; width: 770px; font-size: 11px; }
+header { margin: 0 auto 50px; width: 58.4%; overflow: hidden; }
+header h1 { float: left; width: 17.7%; }
+header h1 span { display: block; text-indent: -9999px; height: 0px; }
+header p { margin-top: 2px; float: right; width: 76%; font-size: 12px; line-height: 17px; }
+
+section { width: 100%; }
+
+section.adhere { margin: 0 auto 20px; width: 100%; }
+
+figure { width: 100%; }
+figure figcaption { margin-top: 10px; font-size: 12px; line-height: 17px; text-align: center; }
+figure img { border: 1px solid #eee; }
+
+pre { margin-bottom: 20px; padding: 5px; font: normal normal 11px/16px monospace; background-color: #eee; color: #555; border-radius: 5px; }
+/* 		pre code { display: block; padding: 5px; } */
+
+.img-marker { width: 11px; height: 11px; background: url('../images/red_marker.png') left top no-repeat; }
+.img-marker:hover { cursor: pointer; }
+.caption { padding: 8px 5px; width: 130px; font-size: 12px; line-height: 17px; color: #fff; background-color: #d11919; border-radius: 3px; text-align: center; }
+.as-cap { padding: 5px; width: 100px; font-size: 11px; line-height: 15px; text-align: right; background-color: #cff; }
+
+.left { float: left; }
+.right { float: right; }
+.center { text-align: center; }

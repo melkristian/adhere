@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>adhere.js | A jQuery Plugin</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<!--[if lt IE 9]>
+	<!-- <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script> -->
+	<![endif]-->	
+	<!--[if lt IE 7]><![endif]-->
+	<!--[if IE]><![endif]-->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/styles.css" />	
+	<script type="text/javascript" src="assets/js/jquery.1.4.1.min.js"></script>
+	<script type="text/javascript" src="jquery.adhere.min.js"></script>	
+</head>
+
+<body>
+	<div id="wrapper">
+		<header>
+			<h1><a href="#" title="adhere.js homepage"><img src="assets/images/adhere_logo.png" width="80" height="46" alt="adhere.js" /><span>adhere.js</span></a></h1>
+			<p>A jQuery plugin that takes a no-database approach to image annotation positioning.</p>
+		</header>
+		
+		<section class="example">
+			<h2 class="center">Basic Usage</h2>
+			<h3 class="center"><strong>Example 1</strong>: SPCB Survey Website. Hover over the red markers.</h3>
+			<section class="adhere" id="ex1-ah-450-375">
+				<figure>
+					<img src="assets/images/spcb_survey.png" width="450" height="375" alt="SPCB Survey Site" />
+				</figure>
+				<ul>
+					<li data-coords="ah-239-29">School Seal / Logo</li>				
+					<li data-coords="ah-100-11">User Comments</li>
+					<li data-coords="ah-359-111">Main Question</li>
+					<li data-coords="ah-77-142">Class Sections</li>
+					<li data-coords="ah-293-234">User Contact Info</li>
+					<li data-coords="ah-396-357">Link to Reports</li>
+				</ul>
+			</section>
+			
+			<section class="breakdown">
+				<h3>The Initialization</h3>				
+				<pre><code>$(".adhere").adhere({
+  captionContainer:'ul',
+  collapseList:true,
+  marker:{xAlign: 'center', yAlign:'center', html:'<span class="img-marker"></span>'},
+  caption:{className:'caption', xAlign:'center', yAlign:'top'}
+});</code></pre>
+			
+				<h3>The Markup</h3>
+				
+				<pre><code>&lt;section class=&quot;adhere&quot; id=&quot;ex1-ah-450-375&quot;&gt;
+  &lt;figure&gt;
+    &lt;img src=&quot;images/spcb_survey.png&quot; width=&quot;370&quot; height=&quot;308&quot; alt=&quot;SPCB Survey Site&quot; /&gt;
+  &lt;/figure&gt;
+  &lt;ul&gt;
+    &lt;li data-coords=&quot;ah-239-29&quot;&gt;School Seal / Logo&lt;/li&gt;				
+    &lt;li data-coords=&quot;ah-100-11&quot;&gt;Survey User Comments&lt;/li&gt;
+    &#8230;
+    &lt;li data-coords=&quot;ah-396-357&quot;&gt;Link to Reports&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+</code></pre>				
+			</section>
+		</section>
+		
+		<footer>
+		</footer>
+	</div>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$(".adhere").adhere({
+				captionContainer:'ul',
+				collapseList:true,
+				marker:{xAlign: 'center', yAlign:'top', html:'<span class="img-marker"></span>'},
+				caption:{className:'caption', xAlign:'left', yAlign:'center'}
+			});		
+		});
+	</script>
+</body>
+</html>
+
