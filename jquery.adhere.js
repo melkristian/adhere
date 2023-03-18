@@ -12,7 +12,7 @@
 		}, o || {});
 		
 		return this.each(function(){
-		
+
 		 	var figure = $(this);
 			var captionContainer = $(this).find(o.captionContainer).get(0);
 			var captionedImage = $(this).find('img').get(0);
@@ -20,11 +20,13 @@
 			
 			if(captionedImage != null){			
 				// Use .load on the image for more accurate dimensions
-				if($.browser.webkit){
+				if(captionedImage.complete || !$.browser.webkit){
+					processAdhere(o, figure, captionContainer, captionedImage, ratio);
+				} else {
 					$(captionedImage).load(function(){
 						processAdhere(o, figure, captionContainer, captionedImage, ratio);
 					});
-				} else processAdhere(o, figure, captionContainer, captionedImage, ratio);
+				}
 			}
 		});
 	
@@ -32,16 +34,12 @@
 	
 	function processAdhere(o, figure, captionContainer, captionedImage, ratio){
 	
-		if(fig_id = figure.attr('id')){	
-		
-			if(fig_id.match(/(ah-[0-9]+-[0-9]+)$/)){
-			
-				// figure dimensions
-				var id_parts = fig_id.split(/-/);
-				var fig_dim = {'w':id_parts[(id_parts.length)-2], 'h':id_parts[(id_parts.length)-1]};
-				
-			}
+		var fig_id = figure.attr('id');
 
+		if(fig_id.match(/(ah-[0-9]+-[0-9]+)$/)){
+			// figure dimensions
+			var id_parts = fig_id.split(/-/);
+			var fig_dim = {'w':id_parts[(id_parts.length)-2], 'h':id_parts[(id_parts.length)-1]};
 		}
 		
 		var imageWidth = $(captionedImage).width() || 0;
@@ -56,7 +54,7 @@
 		// Set style for container, close the positioned elements in
 		figure.css({'position':'relative'});
 		
-		if('ontouchstart' in window){ o.action.cEvent = 'click'; alert('touch'); }
+		if('ontouchstart' in window){ o.action.cEvent = 'click'; }
 		
 		if(typeof fig_dim != 'undefined'){
 		
@@ -81,12 +79,11 @@
 				.children().css(o.collapseList ? {'position':'absolute'} : '');
 				
 		}
-		
+
+		var wrapId = 'adhere-'+fig_id;
 		if(!o.collapseList || autoMarker){
-		
-			//var imgFloat = $(captionedImage).css('styleFloat');
-			
-			var wrap = $('<div id="adhere"></div>')
+
+			var wrap = $('<div id="'+wrapId+'"></div>')
 				.css({'width':imageWidth+'px','height':imageHeight+'px'});
 			
 			$(captionedImage).wrap(wrap);
@@ -122,8 +119,8 @@
 				var html = (o.marker.html) ? o.marker.html : ('<span>'+ (o.captionContainer == 'ol' ? (i+1): '&bull;') +'</span>');
 				
 				var origEl = e;
-			
-				e = $(html).css({'position':'absolute'}).addClass(o.marker.className).appendTo($('#adhere'));
+
+				e = $(html).css({'position':'absolute'}).addClass(o.marker.className).appendTo($('#'+wrapId));
 				
 			}
 			
@@ -274,13 +271,13 @@
 					// smart outer: all captions away from center
 					return (x > half) ? 'right' : 'left';
 				
-				} else return;
+				}
 			
 			},
 			
 			bindEvent: function(isPaired){
 				
-				var isPaired = isPaired || false;
+				isPaired = isPaired || false;
 				var ev = o.action.cEvent || '';
 				var func = o.action.cName || '';
 				
@@ -290,9 +287,11 @@
 			},
 			
 			defaultCall: function(){
-			
-				$(el).hover(function(){ $(capE.alignCaption.pair).fadeIn('fast') }, function(){ $(capE.alignCaption.pair).fadeOut("fast") });
-			
+				$(el).hover(function(){
+					$(capE.alignCaption.pair).fadeIn('fast')
+				}, function(){
+					$(capE.alignCaption.pair).fadeOut("fast")
+				});
 			}
 		};
 		
